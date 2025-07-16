@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FixGO - Serviços de Marido de Aluguel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+        }
+        .highlight-box {
+            position: relative;
+        }
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 50%;
+            background-color: rgba(251, 191, 36, 0.2);
+            z-index: -1;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://esm.sh/@google/genai@^1.9.0",
+    "marked": "https://esm.sh/marked@^16.0.0"
+  }
+}
+</script>
+</head>
+<body class="font-sans text-gray-800">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://res.cloudinary.com/dtyszwyp0/image/upload/v1752702775/Ativo_1_kgdmfj.svg" alt="FixGO Logo" class="w-[200px] h-auto mr-3">
+            </div>
+            <div class="hidden md:flex items-center space-x-4">
+                <a href="tel:62992329657" class="flex items-center text-gray-700 hover:text-amber-600 transition">
+                    <i class="fas fa-phone-alt mr-2"></i>
+                    <span>(62) 9 9232-9657</span>
+                </a>
+                <a href="mailto:contatofixgo@gmail.com" class="flex items-center text-gray-700 hover:text-amber-600 transition">
+                    <i class="fas fa-envelope mr-2"></i>
+                    <span>contatofixgo@gmail.com</span>
+                </a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-gray-700 focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white py-2 px-4 shadow-md">
+            <div class="flex flex-col space-y-2">
+                <a href="tel:62992329657" class="flex items-center text-gray-700 hover:text-amber-600 transition py-2">
+                    <i class="fas fa-phone-alt mr-2"></i>
+                    <span>(62) 9 9232-9657</span>
+                </a>
+                <a href="mailto:contato@reparorapido.net" class="flex items-center text-gray-700 hover:text-amber-600 transition py-2">
+                    <i class="fas fa-envelope mr-2"></i>
+                    <span>contato@reparorapido.net</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient py-12 md:py-20">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight">
+                        Serviços de Manutenção <span class="highlight-box">Residencial e Comercial</span> <span class="highlight-box">em Goiânia e Região
+                    </h2>
+                    <p class="text-lg text-gray-600 mb-6">Marido de Aluguel profissional para todas as necessidades da sua casa ou empresa.</p>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-6">
+                        <p class="font-medium text-gray-800"><i class="fas fa-check-circle text-amber-500 mr-2"></i> Orçamento grátis via WhatsApp</p>
+                    </div>
+                    <a href="https://wa.me/5562992329657" 
+                       class="inline-flex items-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                        <i class="fab fa-whatsapp mr-2 text-xl"></i>
+                        Solicitar Orçamento (62) 9 9232-9657
+                    </a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <img src="https://res.cloudinary.com/dtyszwyp0/image/upload/v1752703145/unnamed_hlbr6c.webp" 
+                         alt="Serviços de manutenção" 
+                         class="rounded-lg shadow-xl w-full max-w-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Serviços que Oferecemos</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Service Category 1 -->
+                <div class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-amber-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-hammer text-amber-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Serviços em Madeira</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-amber-500 mt-1 mr-2"></i>
+                            <span>Conserto de Móveis de Madeira</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-amber-500 mt-1 mr-2"></i>
+                            <span>Instalação de Portas e Janelas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-amber-500 mt-1 mr-2"></i>
+                            <span>Montagem de Móveis em Geral</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-amber-500 mt-1 mr-2"></i>
+                            <span>Instalação de Armários e Suportes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-amber-500 mt-1 mr-2"></i>
+                            <span>Instalação de Pisos Flutuantes</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service Category 2 -->
+                <div class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-blue-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-tools text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Eletrodomésticos</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                            <span>Instalação de Ventiladores de Teto</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                            <span>Instalação de Máquina de Lavar</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                            <span>Instalação de Lava Louças</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                            <span>Instalação de Coifa</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-500 mt-1 mr-2"></i>
+                            <span>Instalação de Microondas</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service Category 3 -->
+                <div class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-green-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-bolt text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Instalações Elétricas</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Instalação de Luminárias e Lustres</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Instalação de Tomadas e Interruptores</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Instalação de Chuveiro Elétrico</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Instalação de Aquecedor</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
+                            <span>Instalação de Interfones</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service Category 4 -->
+                <div class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-purple-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-home text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Residencial</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Instalação de Cortinas e Persianas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Instalação de Quadros e Espelhos</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Instalação de Nichos e Prateleiras</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Instalação de Varais de Roupa</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-500 mt-1 mr-2"></i>
+                            <span>Instalação de Sapateira</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service Category 5 -->
+                <div class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-red-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-tint text-red-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Hidráulica</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
+                            <span>Instalação de Torneiras e Pias</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
+                            <span>Instalação de Pias e Tanques</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
+                            <span>Instalação de Ducha Higiênica</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
+                            <span>Instalação de Bancadas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-red-500 mt-1 mr-2"></i>
+                            <span>Instalação de Itens no Banheiro</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Service Category 6 -->
+                <div class="service-card bg-white p-6 rounded-lg shadow-md border border-gray-100 transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                            <i class="fas fa-paint-roller text-indigo-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800">Reparos Gerais</h3>
+                    </div>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Reparo e pintura em parede</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Mudança de cor</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Conserto de Telhados</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Manutenção de Gavetas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-indigo-500 mt-1 mr-2"></i>
+                            <span>Troca de Dobradiças e Corrediças</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="https://wa.me/5562992329657" 
+                   class="inline-flex items-center bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                    <i class="fab fa-whatsapp mr-2 text-xl"></i>
+                    Fale Conosco para Mais Serviços
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Por Que Escolher a FixGo?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <div class="text-amber-500 text-4xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Reparos Rápidos e Eficiência</h3>
+                    <p class="text-gray-600">Reparos rápidos sem sacrificar a qualidade. Resolvemos seus problemas no tempo que você precisa.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <div class="text-amber-500 text-4xl mb-4">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Profissionalismo Experiente</h3>
+                    <p class="text-gray-600">Uma equipe dedicada, experiente e comprometida em superar suas expectativas.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <div class="text-amber-500 text-4xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Versatilidade em Serviços</h3>
+                    <p class="text-gray-600">Desde pequenos reparos até melhorias significativas, cobrimos todas as áreas para manter sua casa impecável.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <div class="text-amber-500 text-4xl mb-4">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Atendimento Personalizado</h3>
+                    <p class="text-gray-600">Valorizamos cada cliente individualmente. Oferecemos atendimento personalizado, ouvindo suas necessidades.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <div class="text-amber-500 text-4xl mb-4">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Compromisso com a Satisfação</h3>
+                    <p class="text-gray-600">Sua satisfação é nossa principal prioridade. Garantimos que cada cliente esteja completamente satisfeito.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                    <div class="text-amber-500 text-4xl mb-4">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Transparência e Confiabilidade</h3>
+                    <p class="text-gray-600">Operamos com transparência em todos os aspectos, desde orçamentos claros até a execução dos serviços.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warning Section -->
+    <section class="py-12 bg-amber-50">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="mb-6">
+                    <i class="fas fa-exclamation-triangle text-amber-500 text-4xl"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+                    Você pode tentar resolver os problemas da sua casa por conta própria, mas sem a experiência e o conhecimento adequados, pode acabar causando mais danos do que reparos.
+                </h2>
+                <p class="text-lg text-gray-700 mb-8">
+                    Deixe os reparos da sua casa com profissionais qualificados. Nossa equipe está pronta para ajudar com qualquer necessidade de manutenção residencial ou comercial.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="tel:62992329657" 
+                       class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center">
+                        <i class="fas fa-phone-alt mr-2"></i>
+                        Ligar Agora
+                    </a>
+                    <a href="https://wa.me/5562992329657" 
+                       class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center">
+                        <i class="fab fa-whatsapp mr-2"></i>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="https://res.cloudinary.com/dtyszwyp0/image/upload/v1752702775/Ativo_1_kgdmfj.svg" alt="FixGO Logo" class="h-12 w-12 mr-3">
+                        <h3 class="text-xl font-bold">FixGO</h3>
+                    </div>
+                    <p class="text-gray-300 mb-4">Serviços de Marido de Aluguel Residencial e Comercial.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contato</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-amber-400"></i>
+                            <a href="tel:62992329657" class="hover:text-amber-400 transition">(62) 9 9232-9657</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-amber-400"></i>
+                            <a href="mailto:contatofixgo@gmail.com" class="hover:text-amber-400 transition">contatofixgo@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Redes Sociais</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-gray-700 hover:bg-amber-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 hover:bg-amber-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/5562992329657" class="bg-gray-700 hover:bg-green-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 FixGO. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://wa.me/5562992329657" 
+           class="bg-green-500 hover:bg-green-600 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-110">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
